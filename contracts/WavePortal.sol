@@ -9,8 +9,6 @@ contract WavePortal {
     uint256 private seed;
 
     event NewWave(address indexed from, uint256 timestamp, string message);
-
-
     struct Wave {
         address waver; // The address of the user who waved.
         string message; // The message the user sent.
@@ -46,13 +44,8 @@ contract WavePortal {
             require(prizeAmount <= address(this).balance, "Trying to withdraw more money than the contract has."); 
             (bool success, ) = (msg.sender).call{value: prizeAmount}("");
             require(success, "Failed to withdraw money from contract.");
-
-
         }
-        
         emit NewWave(msg.sender, block.timestamp, _message);
-
-        
     }
 
     function getAllWaves() public returns (Wave[] memory){
